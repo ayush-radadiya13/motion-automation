@@ -35,6 +35,18 @@ html{
   }
 }
 
+/* Optional: if you want to add custom animation */
+@keyframes breatheRotate {
+  0%, 100% { transform: rotate(0deg) scale(1); opacity: 1; }
+  25% { transform: rotate(15deg) scale(1.1); opacity: 0.7; }
+  50% { transform: rotate(0deg) scale(1); opacity: 1; }
+  75% { transform: rotate(-15deg) scale(1.1); opacity: 0.7; }
+}
+.animate-logo-breathe-rotate {
+  animation: breatheRotate 2.5s ease-in-out infinite;
+}
+
+
 .animate-logo-breathe-rotate {
   animation: logo-breathe-rotate 3s ease-in-out infinite;
 }

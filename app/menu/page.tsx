@@ -1,109 +1,126 @@
 "use client";
 import Link from "next/link";
-import { Header } from "../Header/page";
+import { Header } from "@/components/header";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ContactPage } from "@/components/address";
 
 export default function HomePage() {
+  const [view, setView] = useState<"menu" | "products">("menu");
+
+  const menuItems = [
+    { href: "/mainpage", label: "Home" },
+    { href: "/about-us", label: "About Us" },
+    { href: "#", label: "Products", onClick: () => setView("products") },
+    { href: "/login", label: "Services" },
+    { href: "/login", label: "Our Team" },
+    { href: "/contect-us", label: "Contact Us" },
+  ];
+
+  const productsList = [
+    { href: "/products/mitsubishi", label: "Mitsubishi" },
+    { href: "/products/veichi", label: "Veichi" },
+    { href: "/products/adtech", label: "Adtech" },
+  ];
+
   return (
-    <div className="relative min-h-screen flex flex-col bg-cover justify-center bg-center overflow-hidden">
+    <div className="min-h-screen flex flex-col">
+      {/* Header stays on top */}
       <Header />
 
-      {/* Background Text */}
-      <div className="absolute top-1/2 left-4 md:left-10 transform -translate-y-1/2 pointer-events-none z-0">
-        <h1
-          className="text-[60px] sm:text-[100px] md:text-[160px] lg:text-[200px] font-bold opacity-5 select-none"
-          style={{ fontFamily: "Century Gothic, sans-serif" }}
-        >
-          MENU
-        </h1>
-      </div>
-
-      <main className="relative z-10 flex-grow flex flex-col md:flex-row px-4 sm:px-8 py-6 gap-8 md:gap-12">
-        {/* Left Side: Menu Links */}
-        <div className="flex flex-col gap-4 sm:gap-6 w-full md:w-1/2 animate-fade-in">
-          {[
-            { href: "/mainpage", label: "Home" },
-            { href: "/about-us", label: "About Us" },
-            { href: "/login", label: "Products" },
-            { href: "/login", label: "Services" },
-            { href: "/login", label: "Our Team" },
-            { href: "/login", label: "Contact Us" },
-          ].map(({ href, label }) => (
-            <Link
-              key={label}
-              href={href}
-              className="px-4 py-2 text-xl sm:text-2xl font-semibold transition-all duration-300 ease-in-out hover:text-blue-700 hover:text-2xl custom-font w-full sm:w-auto"
+      {/* Main content area */}
+      <div className="relative flex-grow flex bg-cover bg-center">
+        {/* Background big text behind left side */}
+        <div className="absolute inset-0 flex items-center justify-center md:justify-start pl-0 md:pl-10 pointer-events-none z-0 select-none">
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={view}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 0.05, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.5 }}
+              className="text-[40px] sm:text-[80px] md:text-[140px] lg:text-[180px] font-bold text-center md:text-left leading-tight"
               style={{ fontFamily: "Century Gothic, sans-serif" }}
             >
-              {label}
-            </Link>
-          ))}
+              {view === "menu" ? "MENU" : "PRODUCTS"}
+            </motion.h1>
+          </AnimatePresence>
         </div>
 
-        {/* Right Side: Info Sections */}
-        <div
-          className="w-full md:w-1/2 p-6 sm:p-12 flex flex-col gap-6 text-base sm:text-lg animate-fade-in"
-          style={{ fontFamily: "Verdana, sans-serif" }}
-        >
-          {/* Address */}
-          <section>
-            <h2 className="font-bold text-lg sm:text-xl mb-2 text-blue-600">
-              Address
-            </h2>
-            <p>Plot No.15, Survey No.20, Near Punam Dumper,</p>
-            <p>Gondal Road, Vavdi, Rajkot,</p>
-            <p>Rajkot - 360004, Gujarat, India</p>
-          </section>
+        {/* Main flex container with left menu/products and right contact */}
+        <main className="relative z-10 flex flex-col md:flex-row flex-grow px-4 sm:px-8 pt-6 md:pt-12 gap-8 md:gap-16 max-w-7xl mx-auto w-full">
+          {/* Left Side: Menu or Products list */}
+          <div className="flex flex-col gap-6 w-full md:w-1/2 text-center md:text-left">
+            <AnimatePresence mode="wait" initial={false}>
+              {view === "menu" ? (
+                <motion.div
+                  key="menu-links"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 30 }}
+                  transition={{ duration: 0.4 }}
+                  className="flex flex-col gap-4 sm:gap-6"
+                >
+                  {menuItems.map(({ href, label, onClick }) => (
+                    <Link
+                      key={label}
+                      href={href}
+                      onClick={onClick || undefined}
+                      className="px-4 py-2 text-lg sm:text-xl md:text-2xl font-semibold transition-transform duration-300 ease-in-out hover:text-blue-700 hover:scale-110"
+                      style={{ fontFamily: "Century Gothic, sans-serif" }}
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="product-list"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 30 }}
+                  transition={{ duration: 0.4 }}
+                  className="flex flex-col gap-4 sm:gap-6"
+                >
+                  {/* Back Button */}
+                  <button
+                    onClick={() => setView("menu")}
+                    className="
+                      mb-4 px-4 py-2 text-xl font-medium 
+                      text-center md:text-left
+                      hover:text-red-400                 
+                      transition-all duration-300 ease-in-out
+                      hover:scale-105 hover:translate-x-1
+                    "
+                    style={{ fontFamily: "Century Gothic, sans-serif" }}
+                  >
+                    <b>← Back to Menu</b>
+                  </button>
 
-          {/* Contact */}
-          <section>
-            <h2 className="font-bold text-lg sm:text-xl mb-2 text-blue-600">
-              Contact
-            </h2>
-            <p>We’d love to talk about how we can work together.</p>
-            <p>+91 9998212691</p>
-            <p>motionautomationrajkot@gmail.com</p>
-          </section>
+                  {productsList.map(({ href, label }) => (
+                    <Link
+                      key={label}
+                      href={href}
+                      className="px-4 py-2 text-lg sm:text-xl md:text-2xl font-semibold transition-transform duration-300 ease-in-out hover:text-pink-400 hover:scale-110"
+                      style={{ fontFamily: "Century Gothic, sans-serif" }}
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
-          {/* Follow Us */}
-          <section>
-            <h2 className="font-bold text-lg sm:text-xl mb-2 text-blue-600">
-              Follow Us
-            </h2>
-            <div className="flex gap-6 text-sm sm:text-base">
-              {/* Replace text with icons if you want */}
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-600"
-              >
-                Facebook
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-400"
-              >
-                Twitter
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-pink-600"
-              >
-                Instagram
-              </a>
-            </div>
-          </section>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-opacity-60 text-center p-4 text-sm sm:text-base">
-        <p>2025 © Made with ♥ by Ayush Radadiya</p>
-      </footer>
+          {/* Right Side: Contact Info */}
+          <div
+            className="w-full md:w-1/2 p-4 sm:p-6 sm:py-0 text-sm sm:text-base md:text-lg text-center md:text-left"
+            style={{ fontFamily: "Verdana, sans-serif" }}
+          >
+            <ContactPage />
+          </div> 
+        </main>
+      </div>
     </div>
   );
 }

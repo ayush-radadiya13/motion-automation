@@ -22,7 +22,7 @@ export default function ScrollProgressCircle() {
   if (scrollProgress === 0) return null;
 
   return (
-    <div className="fixed bottom-5 right-5 flex flex-col items-center z-50">
+    <div className="fixed bottom-15 right-5 flex flex-col items-center z-50">
       <div
         className="relative w-20 h-20 rounded-full flex items-center justify-center cursor-pointer"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

@@ -3,10 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion, type Variants } from "framer-motion";
-import { Header } from "../Header/page";
 import { CarouselPlugin } from "@/components/autoimagescrooling";
 import { Card } from "@/components/ui/card";
 import ScrollProgressCircle from "@/components/scrolling-p";
+import Footer from "@/components/footer";
+import { ModeToggle } from "@/components/modetoggle";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -20,23 +21,67 @@ const fadeUp: Variants = {
 export default function HomePage() {
   return (
     <div>
-      <div
-        className="min-h-screen flex flex-col bg-cover bg-center"
-        style={{ backgroundImage: `url('/finalimage.jpg')` }}
-      >
-        <Header />
+      <header className="top-0 w-full z-50 bg-white dark:bg-black transition-colors duration-300">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 h-[80px]">
+          {/* Logo */}
+          <Link href="/" className="flex-shrink-0">
+            <Image
+              src="/motion.png"
+              alt="Logo"
+              width={90}
+              height={30}
+              className="object-contain"
+            />
+          </Link>
 
-        <main className="flex-grow flex flex-col items-center justify-center px-4 sm:px-8 py-4 text-black space-y-16">
-          <div className="max-w-4xl w-full space-y-6 text-center animate-fade-in">
+          {/* Right side nav */}
+          <nav className="flex items-center space-x-4 h-full">
+            <ModeToggle />
+
+          <Link
+            href="/menu"
+            className="
+    flex items-center gap-2 px-4 py-2 text-lg sm:text-xl font-semibold text-blue-600 
+    transition duration-300 ease-in-out custom-font
+    hover:text-pink-400 hover:scale-105
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-400
+  "
+            style={{ fontFamily: "Century Gothic, sans-serif" }}
+          >
+            <span className="text-2xl leading-none transition-transform duration-300 ease-in-out group-hover:rotate-90">
+              ☰
+            </span>
+            <span>Menu</span>
+          </Link>
+          </nav>
+        </div>
+      </header>
+
+      <div
+        className="min-h-screen flex bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{
+          backgroundImage: `url('/finalimage.jpg')`,
+        }}
+      >
+        <main
+          className="
+      flex flex-col items-center 
+      justify-center lg:justify-start 
+      w-full px-4 sm:px-8
+      pt-0 lg:pt-24
+      space-y-6
+    "
+        >
+          <div className="max-w-4xl w-full space-y-8 text-center animate-fade-in">
             <h2
-              className="text-3xl sm:text-5xl md:text-6xl font-bold text-blue-600 py-2 rounded"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-600 py-1 rounded"
               style={{ fontFamily: "Century Gothic, sans-serif" }}
             >
               Welcome to
               <br /> MOTION AUTOMATION
             </h2>
             <p
-              className="p-3 text-2xl sm:text-3xl md:text-4xl font-bold leading-relaxed text-white"
+              className="px-3 sm:px-6 md:px-8 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-relaxed text-white"
               style={{ fontFamily: "Century Gothic, sans-serif" }}
             >
               "Smart automation solutions tailored for complex industrial motion
@@ -44,13 +89,11 @@ export default function HomePage() {
             </p>
             <Button
               asChild
-              className="px-6 py-4 rounded-full border-2 border-blue-700 text-blue-700 font-semibold hover:bg-blue-700 hover:text-white transition-colors duration-300"
+              className="px-5 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border-2 border-blue-700 text-blue-700 font-semibold hover:bg-blue-700 hover:text-white transition-colors duration-300"
             >
               <Link href="/about-us">About Us</Link>
             </Button>
           </div>
-
-          {/* Motion section */}
         </main>
       </div>
 
@@ -195,10 +238,12 @@ export default function HomePage() {
         viewport={{ once: true }}
         variants={fadeUp}
       >
-        <Card className="w-full rounded-lg gap-20 px-6 sm:px-14 border">
+        <Card className="w-full rounded-lg gap-20 px-6 sm:px-14 border-2 border-blue-400">
           <section className="flex flex-col sm:flex-row items-center justify-between max-w-7xl py-10 px-2 sm:px-6">
             <div className="max-w-xl text-center sm:text-left mb-8 sm:mb-0">
-              <p className="text-sm font-semibold italic mb-2">Don't be weird.</p>
+              <p className="text-sm font-semibold italic mb-2">
+                Don't be weird.
+              </p>
               <h2 className="text-3xl sm:text-4xl md:text-4xl font-extrabold leading-tight">
                 Would you like more information or do you have a question?
               </h2>
@@ -215,9 +260,7 @@ export default function HomePage() {
 
       <ScrollProgressCircle />
 
-      <footer className="bg-opacity-60 text-center p-4 text-sm sm:text-base">
-        <p>2025 © Made with ♥ by Ayush Radadiya</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
