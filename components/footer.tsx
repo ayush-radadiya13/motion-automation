@@ -11,7 +11,7 @@ export default function Footer() {
         {/* Left side - social icons */}
         <div className="flex space-x-8">
           <a
-            href="https://facebook.com/your-username"
+            href="https://www.facebook.com/motionautomation"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors duration-300 hover:text-gray-700"
@@ -29,7 +29,7 @@ export default function Footer() {
             <FaLinkedin size={28} />
           </a>
           <a
-            href="https://youtube.com/your-username"
+            href="https://www.youtube.com/@Motion_Automation"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors duration-300 hover:text-gray-700"
@@ -38,7 +38,7 @@ export default function Footer() {
             <FaYoutube size={28} />
           </a>
           <a
-            href="https://instagram.com/your-username"
+            href="https://www.instagram.com/motion_automation/"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors duration-300 hover:text-gray-700"

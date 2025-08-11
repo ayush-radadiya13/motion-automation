@@ -26,7 +26,8 @@ export default function LoadingOverlay({ setLoading }: LoadingOverlayProps) {
       progressInterval.current = setInterval(() => {
         setProgress((old) => {
           if (old >= 90) {
-            if (progressInterval.current) clearInterval(progressInterval.current);
+            if (progressInterval.current)
+              clearInterval(progressInterval.current);
             return old;
           }
           return Math.min(old + Math.floor(Math.random() * 10) + 5, 90);
@@ -56,13 +57,14 @@ export default function LoadingOverlay({ setLoading }: LoadingOverlayProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-tr from-blue-900 via-purple-900 to-pink-900 bg-opacity-95 backdrop-blur-md"
+        className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-tr from-blue-900 via-purple-900 to-pink-900 bg-opacity-100 backdrop-blur-md"
       >
-        {/* Logo with breathe, rotate and scale animation */}
+        {/* Logo with subtle animation */}
         <motion.img
           src="/motion.png"
           alt="motion automa"
-          className="w-32 h-32 object-contain mb-8"
+          className="w-32 h-32 object-contain mb-8 cursor-none" // yeh sahi hai
+          initial={{ opacity: 1 }}
           animate={{
             rotate: [0, 15, -15, 0],
             scale: [1, 1.1, 1, 1.1],
@@ -76,13 +78,13 @@ export default function LoadingOverlay({ setLoading }: LoadingOverlayProps) {
         />
 
         {/* Progress Bar container */}
-        <div className="relative w-72 h-4 rounded-full bg-gray-700 overflow-hidden shadow-lg">
-          {/* Shimmer effect overlay */}
+        <div className="relative w-72 h-4 rounded-full bg-gray-700 overflow-hidden shadow-lg select-none">
+          {/* Shimmer effect */}
           <motion.div
             className="absolute top-0 left-0 h-full w-20 bg-gradient-to-r from-white/40 via-white/20 to-white/40 blur-sm"
             animate={{ x: [-100, 300] }}
             transition={{
-              duration: 2,
+              duration: 1,
               repeat: Infinity,
               ease: "linear",
             }}
@@ -93,8 +95,13 @@ export default function LoadingOverlay({ setLoading }: LoadingOverlayProps) {
             className="h-full bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-600 rounded-full shadow-xl"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           />
+
+          {/* Percentage Text */}
+          <div className="absolute right-3 top-0 bottom-0 flex items-center text-white font-semibold text-sm pointer-events-none">
+            {progress}%
+          </div>
         </div>
       </motion.div>
     </AnimatePresence>

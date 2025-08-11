@@ -8,6 +8,9 @@ import { Card } from "@/components/ui/card";
 import ScrollProgressCircle from "@/components/scrolling-p";
 import Footer from "@/components/footer";
 import { ModeToggle } from "@/components/modetoggle";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { Header } from "@/components/header";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -21,44 +24,9 @@ const fadeUp: Variants = {
 export default function HomePage() {
   return (
     <div>
-      <header className="top-0 w-full z-50 bg-white dark:bg-black transition-colors duration-300">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 h-[80px]">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <Image
-              src="/motion.png"
-              alt="Logo"
-              width={90}
-              height={30}
-              className="object-contain"
-            />
-          </Link>
-
-          {/* Right side nav */}
-          <nav className="flex items-center space-x-4 h-full">
-            <ModeToggle />
-
-          <Link
-            href="/menu"
-            className="
-    flex items-center gap-2 px-4 py-2 text-lg sm:text-xl font-semibold text-blue-600 
-    transition duration-300 ease-in-out custom-font
-    hover:text-pink-400 hover:scale-105
-    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-400
-  "
-            style={{ fontFamily: "Century Gothic, sans-serif" }}
-          >
-            <span className="text-2xl leading-none transition-transform duration-300 ease-in-out group-hover:rotate-90">
-              ☰
-            </span>
-            <span>Menu</span>
-          </Link>
-          </nav>
-        </div>
-      </header>
-
+      <Header />
       <div
-        className="min-h-screen flex bg-cover bg-center bg-no-repeat bg-fixed"
+        className="min-h-screen py-20 flex bg-cover bg-center bg-no-repeat bg-fixed"
         style={{
           backgroundImage: `url('/finalimage.jpg')`,
         }}
@@ -252,14 +220,12 @@ export default function HomePage() {
               asChild
               className="px-8 py-6 rounded-full border-2 border-blue-700 text-blue-700 font-semibold hover:bg-blue-700 hover:text-white transition-colors duration-300 whitespace-nowrap"
             >
-              <Link href="/about-us">About Us</Link>
+              <Link href="/contect-us">Contact Us</Link>
             </Button>
           </section>
         </Card>
       </motion.div>
-
       <ScrollProgressCircle />
-
       <Footer />
     </div>
   );

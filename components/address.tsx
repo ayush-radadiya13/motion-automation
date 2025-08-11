@@ -13,16 +13,17 @@ export function ContactPage() {
       <section>
         <h2 className="font-bold text-blue-600 mb-2 text-xl">Contact</h2>
         <p>We’d love to talk about how we can work together.</p>
-        <p className="font-medium">📞 +91 9998212691</p>
+        <p className="font-medium">📞 +91 99982 12691</p>
+        <p className="font-medium">📞 +91 70467 80350</p>
         <p className="font-medium">✉ motionautomationrajkot@gmail.com</p>
       </section>
 
       {/* Follow Us */}
       <section>
         <h2 className="font-bold text-blue-600 mb-2 text-xl">Follow Us</h2>
-        <div className="flex gap-10 justify-start">
+        <div className="flex gap-8 justify-start">
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/motionautomation"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-600"
@@ -30,15 +31,15 @@ export function ContactPage() {
             Facebook
           </a>
           <a
-            href="https://twitter.com"
+            href="https://www.youtube.com/@Motion_Automation"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-400"
           >
-            Twitter
+           YouTube
           </a>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/motion_automation/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-pink-600"
