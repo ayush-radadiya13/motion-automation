@@ -6,13 +6,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ContactPage } from "@/components/address";
 
 export default function HomePage() {
-  const [view, setView] = useState<"menu" | "products">("menu");
+  const [view, setView] = useState<"menu" | "products" | "services">("menu");
 
   const menuItems = [
     { href: "/mainpage", label: "Home" },
     { href: "/about-us", label: "About Us" },
     { href: "#", label: "Products", onClick: () => setView("products") },
-    { href: "/login", label: "Services" },
+    { href: "#", label: "Services", onClick: () => setView("services") }, // changed to open services
     { href: "/ourteam", label: "Our Team" },
     { href: "/contect-us", label: "Contact Us" },
   ];
@@ -21,6 +21,12 @@ export default function HomePage() {
     { href: "/products/mitsubishi", label: "Mitsubishi" },
     { href: "/products/veichi", label: "Veichi" },
     { href: "/products/adtech", label: "Adtech" },
+  ];
+
+  const servicesList = [
+    { href: "/services/panel", label: "Panel Board" },
+    { href: "/services/autoloader", label: "Autoloader" },
+    { href: "/services/cnc-machines", label: "All types of CNC Machines" },
   ];
 
   return (
@@ -39,14 +45,14 @@ export default function HomePage() {
                 className="text-[40px] sm:text-[80px] md:text-[140px] lg:text-[180px] font-bold text-center md:text-left leading-tight"
                 style={{ fontFamily: "Century Gothic, sans-serif" }}
               >
-                {view === "menu" ? "MENU" : "PRODUCTS"}
+                {view === "menu" ? "MENU" : view === "products" ? "PRODUCTS" : "SERVICES"}
               </motion.h1>
             </AnimatePresence>
           </div>
 
-          {/* Main flex container with left menu/products and right contact */}
+          {/* Main flex container with left menu/products/services and right contact */}
           <main className="relative z-10 flex flex-col md:flex-row flex-grow px-4 sm:px-8 pt-6 md:pt-12 gap-8 md:gap-16 max-w-7xl mx-auto w-full">
-            {/* Left Side: Menu or Products list */}
+            {/* Left Side: Menu / Products / Services list */}
             <div className="flex flex-col gap-6 w-full md:w-1/2 text-center md:text-left">
               <AnimatePresence mode="wait" initial={false}>
                 {view === "menu" ? (
@@ -70,7 +76,7 @@ export default function HomePage() {
                       </Link>
                     ))}
                   </motion.div>
-                ) : (
+                ) : view === "products" ? (
                   <motion.div
                     key="product-list"
                     initial={{ opacity: 0, x: -30 }}
@@ -79,16 +85,9 @@ export default function HomePage() {
                     transition={{ duration: 0.4 }}
                     className="flex flex-col gap-4 sm:gap-6"
                   >
-                    {/* Back Button */}
                     <button
                       onClick={() => setView("menu")}
-                      className="
-                      mb-4 px-4 py-2 text-xl font-medium 
-                      text-center md:text-left
-                      hover:text-red-400                 
-                      transition-all duration-300 ease-in-out
-                      hover:scale-105 hover:translate-x-1
-                    "
+                      className="mb-4 px-4 py-2 text-xl font-medium text-center md:text-left hover:text-red-400 transition-all duration-300 ease-in-out hover:scale-105 hover:translate-x-1"
                       style={{ fontFamily: "Century Gothic, sans-serif" }}
                     >
                       <b>← Back to Menu</b>
@@ -104,6 +103,39 @@ export default function HomePage() {
                         {label}
                       </Link>
                     ))}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="service-list"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 30 }}
+                    transition={{ duration: 0.4 }}
+                    className="flex flex-col gap-4 sm:gap-6"
+                  >
+                    <button
+                      onClick={() => setView("menu")}
+                      className="mb-4 px-4 py-2 text-xl font-medium text-center md:text-left hover:text-red-400 transition-all duration-300 ease-in-out hover:scale-105 hover:translate-x-1"
+                      style={{ fontFamily: "Century Gothic, sans-serif" }}
+                    >
+                      <b>← Back to Menu</b>
+                    </button>
+
+                    {servicesList.map(({ href, label }) => (
+                      <Link
+                        key={label}
+                        href={href}
+                        className="px-4 py-2 text-lg sm:text-xl md:text-2xl font-semibold transition-transform duration-300 ease-in-out hover:text-green-600 hover:scale-110"
+                        style={{ fontFamily: "Century Gothic, sans-serif" }}
+                      >
+                        {label}
+                      </Link>
+                    ))}
+
+                    {/* Optional short description under services */}
+                    <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-600" style={{ fontFamily: "Verdana, sans-serif" }}>
+                      We provide installation, commissioning, and maintenance services for panel boards, autoloaders, and all types of CNC machines. For custom service requests, please contact us via the Contact section.
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>

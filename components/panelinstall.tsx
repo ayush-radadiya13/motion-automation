@@ -17,7 +17,7 @@ export default function AlternatingImageContent() {
             transition={{ duration: 1 }}
           >
             <img
-              src="/images/image1.jpg"
+              src="/panel/1.jpg"
               alt="First section image"
               className="w-full h-full object-cover rounded-lg shadow-lg"
             />
@@ -29,11 +29,13 @@ export default function AlternatingImageContent() {
             transition={{ duration: 1 }}
           >
             <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-              Amazing Features on Left Image
+              Planning and Design:
             </h2>
             <p className="text-gray-600">
-              This section shows an image on the left with content on the right.
-              Smooth animations make it elegant.
+              Determine the machine’s electrical requirements (voltage, current,
+              control logic). <br/>Select appropriate components (VFD,
+              Driver, PLCs, etc.). <br/> Design the panel layout considering
+              safety and accessibility.
             </p>
           </motion.div>
         </div>
@@ -47,11 +49,12 @@ export default function AlternatingImageContent() {
             transition={{ duration: 1 }}
           >
             <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-              Content on Left, Image on Right
+              Preparation:
             </h2>
             <p className="text-gray-600">
-              Now the content is on the left side, and the image on the right
-              side. Responsive and clean design.
+              Gather necessary tools and materials. <br/>Ensure power is switched off
+              in the installation area. <br/>Check panelboard and mounting location
+              for suitability.
             </p>
           </motion.div>
           <motion.div
@@ -61,7 +64,7 @@ export default function AlternatingImageContent() {
             transition={{ duration: 1 }}
           >
             <img
-              src="/images/image2.jpg"
+              src="/panel/2.jpg"
               alt="Second section image"
               className="w-full h-full object-cover rounded-lg shadow-lg"
             />

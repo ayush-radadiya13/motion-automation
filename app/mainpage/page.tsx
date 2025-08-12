@@ -66,50 +66,74 @@ export default function HomePage() {
       </div>
 
       {/* Achievements Section */}
-      <div className="py-10 flex justify-center text-center px-4 sm:px-0">
+      <div className="py-1 flex justify-center text-center px-4 sm:px-0">
         <h1 className="text-xl sm:text-3xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
           Our Achivements
         </h1>
       </div>
 
       <motion.div
-        className="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-8 w-full px-4 sm:px-0"
+        className="max-w-7xl mx-auto flex flex-col md:flex-row items-stretch text-center md:text-left gap-8 w-full px-4 sm:px-0"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeUp}
       >
-        <Image
-          src="/mainimage.jpg"
-          alt="Team"
-          width={600}
-          height={400}
-          className="rounded-lg shadow-lg hover:scale-105 transition-transform duration-500 ease-in-out w-full md:w-1/2 object-cover mx-auto mb-6 md:mb-0"
-        />
-
-        <div className="w-full md:w-1/2 space-y-2">
-          <h6 className="text-2xl sm:text-3xl font-semibold text-blue-600">
+        {/* Left side - Text content */}
+        <div className="order-1 md:order-1 w-full md:w-1/2 space-y-4 h-full flex flex-col justify-center">
+          <h6 className="text-3xl sm:text-4xl font-semibold text-blue-600">
             Motion Automation
           </h6>
           <p className="text-base sm:text-lg leading-relaxed">
-            “Motion Automation”, Have Been Engaged in Designing, Developing and
-            Supplying a Wide Variety of Industrial Automation Products and
-            Solutions, Incorporated in the Year 2016 at Rajkot Gujarat, India.We
-            are Dealing in Product Ragne Like PLC, HMI,VFD, AC Servo Motor, CNC
-            Controller, CNC Autoloader System and Electrical Control Panels.
+            MOTION AUTOMATION Was Founded In 2016 With a Vision to Support and
+            Make Rapid Growth on Industrialization of Nation and Make Some Great
+            Changes in Industrial World. People Around the World Always Trust on
+            MOTION AUTOMATION. We are Dealing in Product Ragne Like PLC, HMI,
+            VFD, AC Servo Motor, CNC Controller, CNC Autoloader System and
+            Electrical Control Panels. We Work Under the Enthusiastic Guidance
+            of Our Team Member. Our Team Have Vast Experience in This Domain of
+            Work.
             <br />
             <br />
-            MOTION AUTOMATION Was Founded In 2016 with a Vision to Support and
-            Make Rapid Growth on Industrialization of Nation and make some great
-            changes in industrial World. People around the world always trust
-            MOTION AUTOMATION.
+            We provide comprehensive automation solutions tailored for a wide
+            range of industries. Our team of expert professionals is dedicated
+            to supporting and developing innovative applications and customized
+            solutions to meet the unique requirements of each customer. With
+            in-depth knowledge in their respective fields and a commitment to
+            staying updated with the latest technologies, our professionals
+            ensure high-quality service delivery.
+            <br />
+            <br />
+            At the heart of our success lies effective communication and strong
+            relationships with our customers, which enable us to understand
+            their needs better and deliver solutions that truly add value. This
+            focus on customer partnership helps us stay ahead of our competitors
+            by consistently exceeding expectations.
+            <br />
+            <br />
+            Additionally, we emphasize continuous innovation, reliable technical
+            support, and scalable systems designed to optimize efficiency and
+            productivity across industrial operations. Our commitment to quality
+            and customer satisfaction makes us a trusted partner in the journey
+            toward total industrial automation.
           </p>
+        </div>
+
+        {/* Right side - Image */}
+        <div className="order-2 md:order-2 w-full md:w-1/2 h-full flex items-center justify-center">
+          <Image
+            src="/robot.jpg"
+            alt="Team"
+            width={600}
+            height={600}
+            className="rounded-lg shadow-lg hover:scale-105 transition-transform duration-500 ease-in-out w-full h-full object-cover"
+          />
         </div>
       </motion.div>
 
       {/* What we offer Section */}
       <motion.div
-        className="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-8 w-full px-4 sm:px-0 py-12"
+        className="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-8 w-full px-4 sm:px-0 py-20"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -117,10 +141,10 @@ export default function HomePage() {
       >
         <section className="max-w-7xl mx-auto sm:text-lg px-0 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full">
           <div>
-            <p className="text-sm uppercase mb-2 text-[#1E2549] leading-tight">
+            <p className="text-sm uppercase mb-2 text-blue-900 leading-tight">
               What we offer
             </p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#1E2549] leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-blue-900 leading-tight">
               Automation Solutions <br /> For All Industries
             </h2>
           </div>
