@@ -32,7 +32,7 @@ export default function Ourteam() {
         <div className="absolute left-1/2 top-12 -z-10 w-[90%] max-w-5xl h-48 sm:h-72 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-20 blur-3xl rounded-full -translate-x-1/2" />
 
         {/* Title */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
+        <h1 className="pt-15 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
           Our Teams
         </h1>
 
