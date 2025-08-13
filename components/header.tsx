@@ -47,7 +47,7 @@ export function Header() {
         showHeader ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3 sm:py-1">
+      <div className="max-w-8xl mx-auto flex justify-between items-center px-4 py-3 sm:py-1">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <Image

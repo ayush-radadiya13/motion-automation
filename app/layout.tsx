@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClientWrapper } from "@/components/ClientWrapper"; // import the wrapper
+import HomePage from "./page";
 
 // Fonts
 const geistSans = Geist({
