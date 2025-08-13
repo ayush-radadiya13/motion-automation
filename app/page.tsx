@@ -66,7 +66,7 @@ export default function HomePage() {
       </div>
 
       {/* Achievements Section */}
-      <div className="py-1 flex justify-center text-center px-4 sm:px-0">
+      <div className="py-10 flex justify-center text-center px-4 sm:px-0">
         <h1 className="text-xl sm:text-3xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
           Our Achivements
         </h1>

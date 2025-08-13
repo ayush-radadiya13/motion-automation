@@ -9,7 +9,7 @@ export default function HomePage() {
   const [view, setView] = useState<"menu" | "products" | "services">("menu");
 
   const menuItems = [
-    { href: "/mainpage", label: "Home" },
+    { href: "/", label: "Home" },
     { href: "/about-us", label: "About Us" },
     { href: "#", label: "Products", onClick: () => setView("products") },
     { href: "#", label: "Services", onClick: () => setView("services") }, // changed to open services

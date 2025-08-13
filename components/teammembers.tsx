@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Director {
   id: number;
@@ -32,29 +32,50 @@ export function TeamCarousel({
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);
-  const isDragging = useRef(false);
 
+  // Update active index on scroll
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const card = el.querySelectorAll<HTMLElement>(".dc-card")[active];
-    if (card) {
-      el.scrollTo({
-        left: card.offsetLeft - el.clientWidth / 2 + card.clientWidth / 2,
-        behavior: "smooth",
+
+    const handleScroll = () => {
+      const children = Array.from(el.children) as HTMLElement[];
+      const center = el.scrollLeft + el.clientWidth / 2;
+
+      // Find card closest to center
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+      children.forEach((child, index) => {
+        const childCenter = child.offsetLeft + child.clientWidth / 2;
+        const distance = Math.abs(center - childCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
       });
-    }
-  }, [active]);
+      setActive(closestIndex);
+    };
+
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Scroll to active card on button click
+  const scrollToActive = (index: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const card = el.children[index] as HTMLElement;
+    el.scrollTo({
+      left: card.offsetLeft - el.clientWidth / 2 + card.clientWidth / 2,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div className="w-full max-w-6xl p-4">
       <div
         ref={containerRef}
         className="flex gap-6 snap-x snap-mandatory touch-pan-x scrollbar-hide"
-        onMouseDown={() => (isDragging.current = true)}
-        onMouseUp={() => (isDragging.current = false)}
-        onTouchStart={() => (isDragging.current = true)}
-        onTouchEnd={() => (isDragging.current = false)}
         style={{
           scrollBehavior: "smooth",
           overflowX: "auto",
@@ -65,27 +86,20 @@ export function TeamCarousel({
         {items.map((d, i) => (
           <motion.article
             key={d.id}
-            className="dc-card snap-center border-2 rounded-2xl p-4 min-w-[300px] md:min-w-[460px] flex-shrink-0 shadow-lg flex flex-col items-center text-center"
+            className="dc-card snap-center border-2 rounded-2xl p-4 min-w-[250px] md:min-w-[460px] flex-shrink-0 shadow-lg flex flex-col items-center text-center"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{
-              opacity: active === i ? 1 : 0.6,
+              opacity: active === i ? 1 : 1, // All cards visible will have full opacity
               scale: active === i ? 1 : 0.97,
             }}
             transition={{ duration: 0.4 }}
           >
             <div className="w-28 h-28 md:w-50 md:h-50 rounded-full overflow-hidden mb-3">
-              <img
-                src={d.photo}
-                alt={d.name}
-                className="w-full h-full object-cover"
-              />
+              <img src={d.photo} alt={d.name} className="w-full h-full object-cover" />
             </div>
             <h4 className="font-semibold text-lg">{d.name}</h4>
             <span className="text-sm opacity-70 mb-2">{d.title}</span>
-            <p
-              className="text-sm opacity-80"
-              dangerouslySetInnerHTML={{ __html: d.description }}
-            />
+            <p className="text-sm opacity-80" dangerouslySetInnerHTML={{ __html: d.description }} />
           </motion.article>
         ))}
       </div>
@@ -95,15 +109,13 @@ export function TeamCarousel({
         <div className="flex py-6 items-center justify-center mb-4">
           <div className="flex gap-2">
             <button
-              onClick={() =>
-                setActive((s) => (s - 1 + items.length) % items.length)
-              }
+              onClick={() => scrollToActive((active - 1 + items.length) % items.length)}
               className="px-3 py-1 rounded-lg border"
             >
               ‹
             </button>
             <button
-              onClick={() => setActive((s) => (s + 1) % items.length)}
+              onClick={() => scrollToActive((active + 1) % items.length)}
               className="px-3 py-1 rounded-lg border"
             >
               ›
@@ -111,9 +123,6 @@ export function TeamCarousel({
           </div>
         </div>
       )}
-
-      {/* Dots */}
-    
     </div>
   );
 }
